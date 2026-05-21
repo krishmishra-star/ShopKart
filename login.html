@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopKart — Sign In</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="darkMode.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="color-arc-layout.png">
+  <style>
+    .hidden-form { display: none; }
+    .active-form { display: block; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-md bg-white border border-gray-200 rounded-md shadow-sm p-8 relative">
+
+    <a href="index.html" class="flex items-center justify-center gap-2.5 text-2xl font-extrabold text-gray-900 mb-8 group">
+      <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-base font-black tracking-wider transition-all duration-300 group-hover:bg-blue-700 shadow-sm shadow-blue-600/25">
+        S
+      </div>
+      <span class="tracking-tight">Shop<span class="text-blue-600">Kart</span></span>
+    </a>
+
+    
+    <div id="loginForm" class="active-form w-full">
+      <h2 class="text-xl font-bold text-gray-900 mb-6 text-center">Sign In</h2>
+
+      <form id="formLogin" class="space-y-4" novalidate>
+        <div>
+          <label for="loginEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input
+            type="email" id="loginEmail" required autocomplete="email"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm bg-white"
+            placeholder="you@example.com"
+          >
+        </div>
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label for="loginPassword" class="text-sm font-medium text-gray-700">Password</label>
+            <button type="button" data-switch-to="forgotForm" class="text-xs text-blue-600 hover:underline">
+              Forgot?
+            </button>
+          </div>
+          <div class="relative">
+            <input
+              type="password" id="loginPassword" required autocomplete="current-password"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm bg-white pr-10"
+              placeholder="Enter your password"
+            >
+            <button type="button" class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 mt-2"
+        >
+          Sign In
+        </button>
+      </form>
+
+      <p class="mt-6 text-center text-sm text-gray-600">
+        New here?
+        <button data-switch-to="signupForm" class="text-blue-600 hover:underline font-medium">Create Account</button>
+      </p>
+    </div>
+
+    
+    <div id="signupForm" class="hidden-form w-full">
+      <h2 class="text-xl font-bold text-gray-900 mb-6 text-center">Register</h2>
+
+      <form id="formSignup" class="space-y-4" novalidate>
+        <div>
+          <label for="signupName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+          <input
+            type="text" id="signupName" required autocomplete="name"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm bg-white"
+            placeholder="Your name"
+          >
+        </div>
+        <div>
+          <label for="signupEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input
+            type="email" id="signupEmail" required autocomplete="email"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm bg-white"
+            placeholder="you@example.com"
+          >
+        </div>
+        <div>
+          <label for="signupPassword" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+          <div class="relative">
+            <input
+              type="password" id="signupPassword" required minlength="6" autocomplete="new-password"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm bg-white pr-10"
+              placeholder="Min. 6 characters"
+            >
+            <button type="button" class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 mt-2"
+        >
+          Create Account
+        </button>
+      </form>
+
+      <p class="mt-6 text-center text-sm text-gray-600">
+        Already a member?
+        <button data-switch-to="loginForm" class="text-blue-600 hover:underline font-medium">Sign In</button>
+      </p>
+    </div>
+
+    
+    <div id="forgotForm" class="hidden-form w-full">
+      <button data-switch-to="loginForm" class="text-blue-600 hover:underline text-sm mb-4 inline-block">&larr; Back to sign in</button>
+      <h2 class="text-xl font-bold text-gray-900 mb-6 text-center">Reset Password</h2>
+
+      <form id="formForgot" class="space-y-4" novalidate>
+        <div>
+          <label for="forgotEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input
+            type="email" id="forgotEmail" required autocomplete="email"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm bg-white"
+            placeholder="Enter your account email"
+          >
+        </div>
+        <div>
+          <label for="forgotPassword" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+          <div class="relative">
+            <input
+              type="password" id="forgotPassword" required minlength="6" autocomplete="new-password"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm bg-white pr-10"
+              placeholder="Enter new password"
+            >
+            <button type="button" class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 mt-2"
+        >
+          Reset Password
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  
+  <div
+    id="toast"
+    class="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-md shadow-lg hidden z-50 flex items-center gap-2 text-sm"
+  >
+    <i class="fa-solid fa-circle-info" id="toastIcon"></i>
+    <span id="toastMessage">Message</span>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

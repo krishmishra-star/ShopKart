@@ -1,0 +1,426 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - ShopKart</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="darkMode.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <link rel="icon" type="image/png" href="color-arc-layout.png">
+  <style>
+    @keyframes circle-draw {
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes check-draw {
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes scale-up {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-scale-up {
+      animation: scale-up 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .check-circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 2;
+      stroke-miterlimit: 10;
+      stroke: #10B981;
+      fill: none;
+      animation: circle-draw 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+    .check-sign {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      stroke-width: 3;
+      stroke: #10B981;
+      fill: none;
+      animation: check-draw 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+    }
+    .rzp-active-tab {
+      border-bottom-color: #2563EB;
+      color: #2563EB;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen flex flex-col">
+
+  <nav class="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+    <a href="index.html" class="flex items-center gap-2.5 text-xl font-extrabold text-gray-900 group">
+      <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-base font-black tracking-wider transition-all duration-300 group-hover:bg-blue-700 shadow-sm shadow-blue-600/25">
+        S
+      </div>
+      <span class="tracking-tight">Shop<span class="text-blue-600">Kart</span></span>
+    </a>
+
+    <div class="flex items-center gap-6">
+      <a href="cart.html" class="text-gray-600 hover:text-blue-600 text-sm font-medium">
+        Back to Cart
+      </a>
+    </div>
+
+  </nav>
+
+  <main class="flex-1 px-6 py-8 max-w-4xl mx-auto w-full">
+
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">
+      Shipping Details
+    </h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- Form -->
+      <div class="md:col-span-2">
+
+        <form
+          id="checkoutForm"
+          class="bg-white border border-gray-200 rounded-md p-6 shadow-sm space-y-4"
+        >
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Full Name
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none text-sm"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Email Address
+            </label>
+
+            <input
+              id="email"
+              type="email"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none text-sm"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Phone Number
+            </label>
+
+            <input
+              id="phone"
+              type="text"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none text-sm"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Address
+            </label>
+
+            <textarea
+              id="address"
+              required
+              rows="4"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none text-sm"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Pincode
+            </label>
+
+            <input
+              id="pincode"
+              type="text"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none text-sm"
+            />
+          </div>
+
+          <div class="pt-4 border-t border-gray-100">
+
+            <h3 class="font-bold text-gray-800 mb-3">
+              Payment Method
+            </h3>
+
+            <div class="space-y-2">
+
+              <label class="flex items-center gap-3 p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
+
+                <input
+                  type="radio"
+                  name="pay_method"
+                  value="cod"
+                  checked
+                />
+
+                <span class="text-sm font-medium text-gray-800">
+                  Cash on Delivery
+                </span>
+
+              </label>
+
+              <label class="flex items-center gap-3 p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
+
+                <input
+                  type="radio"
+                  name="pay_method"
+                  value="online"
+                />
+
+                <span class="text-sm font-medium text-gray-800 flex items-center gap-2">
+                  <i class="fa-solid fa-credit-card text-blue-600"></i> Online Payment (Razorpay)
+                </span>
+
+              </label>
+
+            </div>
+
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-3 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 transition-colors mt-4"
+          >
+            Complete Purchase
+          </button>
+
+        </form>
+
+      </div>
+
+      <!-- Summary -->
+      <div class="md:col-span-1">
+
+        <div class="bg-white border border-gray-200 rounded-md p-6 shadow-sm sticky top-24">
+
+          <h2 class="font-bold text-gray-800 mb-4">
+            Order Summary
+          </h2>
+
+          <div
+            id="checkoutSummaryItems"
+            class="space-y-3 mb-4 max-h-60 overflow-y-auto"
+          ></div>
+
+          <div class="border-t border-gray-200 pt-4 space-y-2">
+
+            <div class="flex justify-between text-sm text-gray-600">
+              <span>Subtotal</span>
+              <span id="subtotal">₹0</span>
+            </div>
+
+            <div class="flex justify-between text-lg font-bold text-gray-900">
+              <span>Total</span>
+              <span id="total">₹0</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Premium Simulated Razorpay Gateway Overlay -->
+  <div id="razorpayGatewayModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-[#f4f5f7] rounded-xl shadow-2xl overflow-hidden w-full max-w-[440px] font-sans text-gray-800 border border-gray-200 flex flex-col relative animate-scale-up">
+      <!-- Razorpay Header -->
+      <div class="bg-[#183b56] text-white p-5 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="bg-blue-600 p-1.5 rounded-lg flex items-center justify-center w-8 h-8 font-bold text-white text-xs">
+            RP
+          </div>
+          <div>
+            <h4 class="font-bold text-sm tracking-wide">Razorpay Checkout</h4>
+            <p class="text-[10px] text-gray-300">ShopKart Order Payment</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <p class="text-[10px] text-gray-300">Amount to Pay</p>
+          <p class="font-extrabold text-lg text-white" id="rzpTotalAmount">₹0.00</p>
+        </div>
+      </div>
+
+      <!-- Payment Body -->
+      <div id="rzpPaymentBody" class="p-6 flex-1 flex flex-col min-h-[300px]">
+        <!-- Contact Prefill Card -->
+        <div class="bg-white border border-gray-200 rounded-lg p-3 flex justify-between items-center text-xs text-gray-600 mb-4 shadow-sm">
+          <div>
+            <p class="font-semibold text-gray-800" id="rzpCustomerName">Customer Name</p>
+            <p id="rzpCustomerContact">phone | email</p>
+          </div>
+          <span class="text-blue-600 font-bold hover:underline cursor-pointer text-[10px]" onclick="closeRazorpayGateway()">Change</span>
+        </div>
+
+        <!-- Payment Mode Navigation Tabs -->
+        <div class="flex border-b border-gray-200 mb-4 text-xs font-semibold text-gray-500">
+          <button onclick="switchRzpTab('card')" id="tab-card" class="flex-1 pb-2 border-b-2 rzp-active-tab flex items-center justify-center gap-1.5"><i class="fa-solid fa-credit-card"></i> Card</button>
+          <button onclick="switchRzpTab('upi')" id="tab-upi" class="flex-1 pb-2 border-b-2 flex items-center justify-center gap-1.5"><i class="fa-solid fa-mobile-screen-button"></i> UPI</button>
+          <button onclick="switchRzpTab('netbank')" id="tab-netbank" class="flex-1 pb-2 border-b-2 flex items-center justify-center gap-1.5"><i class="fa-solid fa-building-columns"></i> Netbanking</button>
+        </div>
+
+        <!-- Tab contents -->
+        <div class="flex-1">
+          <!-- CARD VIEW -->
+          <div id="rzp-view-card" class="space-y-3">
+            <div>
+              <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Card Number</label>
+              <div class="relative">
+                <input type="text" id="rzpCardNumber" placeholder="4111 2222 3333 4444" maxlength="19" class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none text-xs focus:border-blue-500 bg-white" />
+                <i class="fa-brands fa-cc-visa absolute right-3 top-2.5 text-gray-400 text-base"></i>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Expiry Date</label>
+                <input type="text" id="rzpCardExpiry" placeholder="MM/YY" maxlength="5" class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none text-xs focus:border-blue-500 bg-white" />
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">CVV</label>
+                <input type="password" id="rzpCardCvv" placeholder="•••" maxlength="3" class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none text-xs focus:border-blue-500 bg-white" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Card Holder Name</label>
+              <input type="text" id="rzpCardHolder" placeholder="Name on card" class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none text-xs focus:border-blue-500 bg-white" />
+            </div>
+          </div>
+
+          <!-- UPI VIEW -->
+          <div id="rzp-view-upi" class="space-y-4 hidden">
+            <div class="grid grid-cols-4 gap-2">
+              <button onclick="selectQuickUpi('gpay')" class="p-2 border border-gray-200 rounded-md bg-white hover:border-blue-500 flex flex-col items-center gap-1">
+                <i class="fa-solid fa-mobile text-green-500 text-lg"></i>
+                <span class="text-[9px] font-semibold">GPay</span>
+              </button>
+              <button onclick="selectQuickUpi('phonepe')" class="p-2 border border-gray-200 rounded-md bg-white hover:border-blue-500 flex flex-col items-center gap-1">
+                <i class="fa-solid fa-mobile text-purple-600 text-lg"></i>
+                <span class="text-[9px] font-semibold">PhonePe</span>
+              </button>
+              <button onclick="selectQuickUpi('paytm')" class="p-2 border border-gray-200 rounded-md bg-white hover:border-blue-500 flex flex-col items-center gap-1">
+                <i class="fa-solid fa-wallet text-sky-500 text-lg"></i>
+                <span class="text-[9px] font-semibold">Paytm</span>
+              </button>
+              <button onclick="selectQuickUpi('bhim')" class="p-2 border border-gray-200 rounded-md bg-white hover:border-blue-500 flex flex-col items-center gap-1">
+                <i class="fa-solid fa-qrcode text-indigo-600 text-lg"></i>
+                <span class="text-[9px] font-semibold">BHIM</span>
+              </button>
+            </div>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 text-xs">@</span>
+              <input type="text" id="rzpUpiId" placeholder="Enter UPI ID (e.g. user@okaxis)" class="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-md outline-none text-xs focus:border-blue-500 bg-white" />
+            </div>
+          </div>
+
+          <!-- NETBANK VIEW -->
+          <div id="rzp-view-netbank" class="space-y-3 hidden">
+            <p class="text-[10px] font-bold text-gray-500 uppercase">Popular Banks</p>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 p-2 border border-gray-200 bg-white rounded-md cursor-pointer hover:border-blue-500">
+                <input type="radio" name="rzp_bank" value="sbi" checked />
+                <span class="text-xs font-medium">State Bank of India</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 border border-gray-200 bg-white rounded-md cursor-pointer hover:border-blue-500">
+                <input type="radio" name="rzp_bank" value="hdfc" />
+                <span class="text-xs font-medium">HDFC Bank</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 border border-gray-200 bg-white rounded-md cursor-pointer hover:border-blue-500">
+                <input type="radio" name="rzp_bank" value="icici" />
+                <span class="text-xs font-medium">ICICI Bank</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 border border-gray-200 bg-white rounded-md cursor-pointer hover:border-blue-500">
+                <input type="radio" name="rzp_bank" value="axis" />
+                <span class="text-xs font-medium">Axis Bank</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="submitRazorpayPayment()" class="w-full mt-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs transition-colors flex items-center justify-center gap-2 shadow-md">
+          <i class="fa-solid fa-lock text-[10px]"></i> Pay Securely <span id="rzpPayBtnAmount">₹0.00</span>
+        </button>
+      </div>
+
+      <!-- Processing State Overlay inside Modal -->
+      <div id="rzpProcessingOverlay" class="absolute inset-0 bg-white flex flex-col items-center justify-center p-6 hidden text-center animate-scale-up">
+        <div class="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-4"></div>
+        <h4 class="font-bold text-gray-800 text-sm">Processing Payment</h4>
+        <p class="text-xs text-gray-500 mt-1">Please do not close this window or refresh the page.</p>
+        <div class="mt-6 text-[10px] text-gray-400 bg-gray-50 border border-gray-200 px-3 py-1 rounded-full inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-shield-halved text-blue-600"></i> Razorpay Secure PCI-DSS
+        </div>
+      </div>
+
+      <!-- Success State Overlay inside Modal -->
+      <div id="rzpSuccessOverlay" class="absolute inset-0 bg-white flex flex-col items-center justify-center p-6 hidden text-center animate-scale-up">
+        <div class="w-16 h-16 flex items-center justify-center mb-4">
+          <svg class="w-full h-full" viewBox="0 0 52 52">
+            <circle class="check-circle" cx="26" cy="26" r="25"/>
+            <path class="check-sign" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+        </div>
+        <h4 class="font-extrabold text-emerald-600 text-lg">Payment Successful!</h4>
+        <p class="text-xs text-gray-500 mt-1" id="rzpPaymentIdPlaceholder">Transaction ID: pay_XXXXXXXXXX</p>
+        <p class="text-[10px] text-gray-400 mt-4">Confirming order details...</p>
+      </div>
+
+      <!-- Razorpay Footer -->
+      <div class="bg-gray-100 px-4 py-3 flex justify-between items-center border-t border-gray-200 text-[10px] text-gray-500">
+        <span>Test Mode</span>
+        <span class="flex items-center gap-1 font-semibold text-gray-700">
+          Secured by <span class="text-blue-600">Razorpay</span> <i class="fa-solid fa-bolt text-blue-500"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated Premium Success Modal -->
+  <div id="successModal" class="fixed inset-0 bg-black/60 backdrop-blur-md hidden z-[60] flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-3xl p-8 text-center max-w-sm w-full mx-4 border border-gray-100 transform scale-95 transition-all duration-300 ease-out animate-scale-up">
+      <div class="w-16 h-16 mx-auto flex items-center justify-center mb-2 bg-emerald-50 rounded-full border border-emerald-100 shadow-inner">
+        <i class="fa-solid fa-circle-check text-5xl text-emerald-500"></i>
+      </div>
+      <h3 class="text-2xl font-extrabold text-gray-900 mt-4">Order Confirmed!</h3>
+      
+      <!-- Amazon Shipping Status Badge -->
+      <div class="mt-2.5 mb-4">
+        <span class="bg-green-50 text-green-700 text-xs font-bold px-3 py-1 rounded-full border border-green-200 inline-flex items-center gap-1.5 animate-pulse">
+          <i class="fa-solid fa-truck-fast"></i> Ready for Shipping
+        </span>
+      </div>
+      
+      <p class="text-gray-500 text-sm leading-relaxed mb-6">
+        Thank you for your purchase! Your order has been registered, and is currently **Ready for Shipping**. You can track its status inside your orders section.
+      </p>
+      
+      <button onclick="window.location.href='orders.html'" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+        <i class="fa-solid fa-box-open"></i> View My Orders
+      </button>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+  <script src="checkout.js"></script>
+
+</body>
+</html>
+```
