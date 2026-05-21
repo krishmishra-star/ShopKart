@@ -134,7 +134,7 @@ function filterProducts() {
 
 async function fetchAllProducts() {
   try {
-    const response = await fetch("https://your-render-url.onrender.com/api/products");
+    const response = await fetch("https://shopkart-10.onrender.com/api/products");
     if (response.ok) {
       const data = await response.json();
       if (data && data.length > 0) {

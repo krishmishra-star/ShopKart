@@ -141,7 +141,7 @@ async function fetchAllProducts() {
   try {
 
     const response = await fetch(
-      "https://your-render-url.onrender.com/api/products"
+      "https://shopkart-10.onrender.com/api/products"
     );
 
     const data = await response.json();
