@@ -2,23 +2,39 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+
 const ProductRoutes = require("./routes/productRoutes");
-const connectDb = require("./config/db");
 const OrderRoutes = require("./routes/orderRoutes");
+const connectDb = require("./config/db");
+
 const app = express();
 
+// Connect Database
 connectDb();
 
-app.use(cors());
+// Middleware
+app.use(
+  cors({
+    origin: "https://krishshop.netlify.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
-app.use("/api/products", ProductRoutes); 
+
+// Routes
+app.use("/api/products", ProductRoutes);
 app.use("/api/orders", OrderRoutes);
 
+// Test Route
 app.get("/", (req, res) => {
-  res.send("server is running");
+  res.send("Server is running");
 });
 
-const Port = process.env.PORT || 2005;
-app.listen(Port, () => {
-  console.log(`Server is running on port ${Port} `);
+// Start Server
+const PORT = process.env.PORT || 2005;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
