@@ -114,51 +114,88 @@ function loadProduct(product) {
 }
 
 async function fetchProduct() {
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
+  if (!productId) return;
 
+  let loaded = false;
+
+  // 1. Try to load from localStorage first for instant responsiveness
   try {
+    const cachedProduct = localStorage.getItem('sk_selectedProduct');
+    if (cachedProduct) {
+      const product = JSON.parse(cachedProduct);
+      if (String(product._id || product.id) === String(productId)) {
+        loadProduct(product);
+        loaded = true;
+      }
+    }
+  } catch (err) {
+    console.log("Error parsing cached product:", err);
+  }
 
-    const params = new URLSearchParams(window.location.search);
-
-    const productId = params.get("id");
-
+  // 2. Fetch from the live API server
+  try {
     const response = await fetch(
       `https://shopkart-10.onrender.com/api/products/${productId}`
     );
-
-    const product = await response.json();
-
-    loadProduct(product);
-
+    if (response.ok) {
+      const product = await response.json();
+      if (product) {
+        loadProduct(product);
+        loaded = true;
+        return;
+      }
+    }
   } catch (error) {
+    console.log("Error fetching product from API:", error);
+  }
 
-    console.log("Error fetching product:", error);
+  // If already loaded from localStorage, we don't need to try fallbackProducts
+  if (loaded) return;
 
+  // 3. Fallback to window.fallbackProducts if API failed and nothing in localStorage matched
+  const fallback = (window.fallbackProducts || []).find(
+    p => String(p._id || p.id) === String(productId)
+  );
+  if (fallback) {
+    loadProduct(fallback);
+  } else {
+    document.getElementById("productDetail").innerHTML = `
+      <div class="text-center py-20">
+        <p class="text-gray-500 text-lg font-medium">Product not found.</p>
+        <a href="explore.html" class="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700">
+          Back to Shop
+        </a>
+      </div>
+    `;
   }
 }
 
 async function fetchAllProducts() {
-
   try {
-
     const response = await fetch(
       "https://shopkart-10.onrender.com/api/products"
     );
-
-    const data = await response.json();
-
-    productsData = data;
-
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data.length > 0) {
+        productsData = data;
+        return;
+      }
+    }
   } catch (error) {
-
-    console.log(error);
-
+    console.log("Error fetching all products, using fallback:", error);
   }
+  productsData = window.fallbackProducts || [];
 }
 
 window.switchProduct = function(id) {
-
+  const p = productsData.find(p => String(p._id || p.id) === String(id));
+  if (p) {
+    localStorage.setItem('sk_selectedProduct', JSON.stringify(p));
+  }
   window.location.href = `product.html?id=${id}`;
-
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
