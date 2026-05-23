@@ -122,7 +122,7 @@ async function fetchProduct() {
     const productId = params.get("id");
 
     const response = await fetch(
-      `https://your-render-url.onrender.com/api/products/${productId}`
+      `https://shopkart-10.onrender.com/api/products/${productId}`
     );
 
     const product = await response.json();

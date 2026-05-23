@@ -15,10 +15,10 @@ connectDb();
 // Middleware
 app.use(
   cors({
-    origin: "https://krishshop.netlify.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
+  origin: ["https://your-project.vercel.app", "https://krishshop.netlify.app"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+})
 );
 
 app.use(express.json());

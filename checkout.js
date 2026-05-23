@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       // 1. Post order to the Node backend
-      const response = await fetch("https://your-render-url.onrender.com/api/orders", {
+      const response = await fetch("https://shopkart-10.onrender.com/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
